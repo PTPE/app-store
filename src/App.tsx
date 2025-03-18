@@ -1,3 +1,4 @@
+import AppList from "./components/AppList";
 import RecommandAppList from "./components/RecommandAppList";
 
 const dummyRecommandAppList = [
@@ -69,9 +70,13 @@ function App() {
         />
       </div>
 
-      <section className=" border-b-[1px] border-gray-300 p-2 space-y-2">
+      <section className="border-b-[1px] border-gray-300 p-2 space-y-2">
         <h2 className="font-semibold text-2xl">推薦</h2>
         <RecommandAppList recommandAppList={dummyRecommandAppList} />
+      </section>
+
+      <section className="p-2">
+        <AppList appList={dummyRecommandAppList} />
       </section>
     </div>
   );

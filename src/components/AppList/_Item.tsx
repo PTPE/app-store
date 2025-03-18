@@ -3,10 +3,11 @@ import { Application } from "../../types";
 type Props = {
   ranking: number;
   app: Application;
+  observeNode: ((node: HTMLElement | null) => void) | null;
 };
-export default function Item({ app, ranking }: Props) {
+export default function Item({ observeNode, app, ranking }: Props) {
   return (
-    <a href={app.link}>
+    <a href={app.link} ref={observeNode}>
       <div className="shrink-0 flex items-center gap-2 py-3">
         <div className="px-2 text-gray-400">{ranking}</div>
         <img

@@ -1,5 +1,5 @@
 export type Application = {
-  link: string;
+  link?: string;
   id: string;
   name: string;
   category: string;

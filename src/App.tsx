@@ -76,7 +76,7 @@ function App() {
       </section>
 
       <section className="p-2">
-        <AppList appList={dummyRecommandAppList} />
+        <AppList />
       </section>
     </div>
   );

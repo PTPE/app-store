@@ -1,5 +1,5 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { getApps, ParamsGetApps } from "../services/app-apis";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { getApps, getRecommandApps, ParamsGetApps } from "../services/app-apis";
 
 export function useGetApps(params: ParamsGetApps) {
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
@@ -11,4 +11,13 @@ export function useGetApps(params: ParamsGetApps) {
   });
 
   return { data, fetchNextPage, hasNextPage };
+}
+
+export function useGetRecommandApps() {
+  const { data, isLoading, error } = useQuery({
+    queryFn: () => getRecommandApps(),
+    queryKey: ["recommandApps"],
+  });
+
+  return { data, isLoading, error };
 }

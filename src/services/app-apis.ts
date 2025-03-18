@@ -58,3 +58,15 @@ export async function getApps({ limit, page }: ParamsGetApps) {
 
   return { data: formattedRes, page };
 }
+
+type ResGetRecommandApps = ResGetApps;
+
+export async function getRecommandApps() {
+  const result: ResGetRecommandApps = await client(
+    `/topgrossingapplications/limit=10/json`
+  );
+
+  const formattedRes = formatGetAppsApiRes(result.data.feed.entry);
+
+  return formattedRes;
+}

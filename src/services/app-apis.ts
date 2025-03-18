@@ -13,6 +13,7 @@ const client = axios.create({
 export type ParamsGetApps = {
   limit: number;
   page: number;
+  query?: string;
 };
 
 export type Entry = {
@@ -22,6 +23,13 @@ export type Entry = {
   "im:image": {
     label: string;
   }[];
+  summary: {
+    label: string;
+  };
+  title: {
+    label: string;
+  };
+
   link: {
     attributes?: {
       href: string;
@@ -47,26 +55,56 @@ export type ResGetApps = {
   };
 };
 
-export async function getApps({ limit, page }: ParamsGetApps) {
+export async function getApps({ page, query = "A" }: ParamsGetApps) {
   const result: ResGetApps = await client(
-    `/topfreeapplications/limit=${limit * page}/json`
+    `/topfreeapplications/limit=100/json`
   );
 
-  const thisPageData = result.data.feed.entry.slice(-limit);
+  const searchedResult = result.data.feed.entry.filter((entry) => {
+    if (!query) return true;
+    return (
+      entry["im:name"].label.includes(query) ||
+      entry.summary.label.includes(query) ||
+      entry.title.label.includes(query)
+    );
+  });
 
-  const formattedRes = formatGetAppsApiRes(thisPageData);
+  const startIndex = (page - 1) * 10;
 
-  return { data: formattedRes, page };
+  const endIndex = page * 10;
+
+  const thisPageData = searchedResult.slice(startIndex, endIndex);
+
+  const formattedData = formatGetAppsApiRes(thisPageData);
+
+  return {
+    data: formattedData,
+    page,
+    totalPage: Math.ceil(searchedResult.length / 10),
+  };
 }
 
-type ResGetRecommandApps = ResGetApps;
+export type ResGetRecommandApps = ResGetApps;
 
-export async function getRecommandApps() {
+export type ParamsGetRecommandApps = {
+  query?: string;
+};
+
+export async function getRecommandApps({ query }: ParamsGetRecommandApps) {
   const result: ResGetRecommandApps = await client(
     `/topgrossingapplications/limit=10/json`
   );
 
-  const formattedRes = formatGetAppsApiRes(result.data.feed.entry);
+  const searchedResult = result.data.feed.entry.filter((entry) => {
+    if (!query) return true;
+    return (
+      entry["im:name"].label.includes(query) ||
+      entry.summary.label.includes(query) ||
+      entry.title.label.includes(query)
+    );
+  });
 
-  return formattedRes;
+  const formattedData = formatGetAppsApiRes(searchedResult);
+
+  return formattedData;
 }

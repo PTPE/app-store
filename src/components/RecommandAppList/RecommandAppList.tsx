@@ -1,8 +1,12 @@
 import { useGetRecommandApps } from "../../hooks/app-queries";
 import Item from "./_Item";
 
-export default function RecommandAppList() {
-  const { data: recommandAppList, isLoading } = useGetRecommandApps();
+type Props = {
+  query?: string;
+};
+
+export default function RecommandAppList({ query }: Props) {
+  const { data: recommandAppList, isLoading } = useGetRecommandApps({ query });
 
   if (isLoading) {
     return <div>loading...</div>;

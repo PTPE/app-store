@@ -1,17 +1,11 @@
-import { useGetRecommandApps } from "../../hooks/app-queries";
+import { Application } from "../../types";
 import Item from "./_Item";
 
 type Props = {
-  query?: string;
+  recommandAppList: Application[];
 };
 
-export default function RecommandAppList({ query }: Props) {
-  const { data: recommandAppList, isLoading } = useGetRecommandApps({ query });
-
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
-
+export default function RecommandAppList({ recommandAppList }: Props) {
   return (
     <div className="flex gap-5 overflow-auto">
       {recommandAppList?.map((app) => (

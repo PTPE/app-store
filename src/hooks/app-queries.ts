@@ -7,7 +7,7 @@ import {
 } from "../services/app-apis";
 
 export function useGetApps(params: ParamsGetApps) {
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
     initialPageParam: 1,
     queryKey: ["apps", params],
     queryFn: ({ pageParam = 1 }) => getApps({ ...params, page: pageParam }),
@@ -15,7 +15,7 @@ export function useGetApps(params: ParamsGetApps) {
       lastpage.page < lastpage.totalPage ? lastpage.page + 1 : undefined,
   });
 
-  return { data, fetchNextPage, hasNextPage };
+  return { data, fetchNextPage, hasNextPage, isFetching };
 }
 
 export function useGetRecommandApps(params: ParamsGetRecommandApps = {}) {

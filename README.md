@@ -1,5 +1,9 @@
 # App Store 模擬
 
+## 部署網頁
+
+https://app-store-alpha-sable.vercel.app/
+
 ## 簡介
 
 使用 Vite 和 React，建立模擬 App Store 應用程式的頁面，功能包括推薦應用程式列表、前 100 名應用程式列表，和搜尋應用程式功能。

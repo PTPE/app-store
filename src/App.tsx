@@ -35,7 +35,7 @@ function App() {
         />
       </div>
 
-      <section className="border-b-[1px] border-gray-300 p-2 space-y-2">
+      <section className="border-b-[1px] border-gray-300 p-3 space-y-2 md:p-6 md:space-y-6 ">
         <h2 className="font-semibold text-2xl">推薦</h2>
         <RecommandAppList recommandAppList={recommandAppList || []} />
       </section>

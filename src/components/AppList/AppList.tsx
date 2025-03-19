@@ -29,7 +29,6 @@ export default function AppList({ query }: Props) {
             observeNode={isLast5 ? observeNode : null}
             app={app}
             key={app.id}
-            ranking={index + 1}
           />
         );
       })}

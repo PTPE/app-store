@@ -1,4 +1,5 @@
 export type Application = {
+  ranking?: number;
   link?: string;
   id: string;
   name: string;
@@ -8,4 +9,8 @@ export type Application = {
     md: string;
     lg: string;
   };
+};
+
+export type ApplicationWithRanking = Application & {
+  ranking: number;
 };

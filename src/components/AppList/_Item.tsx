@@ -1,15 +1,14 @@
 import { Application } from "../../types";
 
 type Props = {
-  ranking: number;
   app: Application;
   observeNode: ((node: HTMLElement | null) => void) | null;
 };
-export default function Item({ observeNode, app, ranking }: Props) {
+export default function Item({ observeNode, app }: Props) {
   return (
     <a href={app.link} ref={observeNode}>
       <div className="shrink-0 flex items-center gap-2 py-3">
-        <div className="px-2 text-gray-400">{ranking}</div>
+        <div className="px-2 text-gray-400">{app.ranking}</div>
         <img
           src={app.iconUrl.sm}
           srcSet={`${app.iconUrl.sm} 640w, ${app.iconUrl.md} 768w, ${app.iconUrl.lg} 1024w`}

@@ -1,5 +1,8 @@
 import axios from "axios";
-import formatGetAppsApiRes from "../utils/format-get-apps-api-res";
+import {
+  formatGetAppsApiRes,
+  formatGetRecommandAppsApiRes,
+} from "../utils/format-get-apps-api-res";
 
 const BASE_URL = "https://itunes.apple.com/tw/rss";
 
@@ -55,7 +58,7 @@ export type ResGetApps = {
   };
 };
 
-export async function getApps({ page, query = "A" }: ParamsGetApps) {
+export async function getApps({ page, query = "" }: ParamsGetApps) {
   const result: ResGetApps = await client(
     `/topfreeapplications/limit=100/json`
   );
@@ -69,13 +72,7 @@ export async function getApps({ page, query = "A" }: ParamsGetApps) {
     );
   });
 
-  const startIndex = (page - 1) * 10;
-
-  const endIndex = page * 10;
-
-  const thisPageData = searchedResult.slice(startIndex, endIndex);
-
-  const formattedData = formatGetAppsApiRes(thisPageData);
+  const formattedData = formatGetAppsApiRes({ res: result, query, page });
 
   return {
     data: formattedData,
@@ -90,21 +87,12 @@ export type ParamsGetRecommandApps = {
   query?: string;
 };
 
-export async function getRecommandApps({ query }: ParamsGetRecommandApps) {
-  const result: ResGetRecommandApps = await client(
+export async function getRecommandApps({ query = "" }: ParamsGetRecommandApps) {
+  const res: ResGetRecommandApps = await client(
     `/topgrossingapplications/limit=10/json`
   );
 
-  const searchedResult = result.data.feed.entry.filter((entry) => {
-    if (!query) return true;
-    return (
-      entry["im:name"].label.includes(query) ||
-      entry.summary.label.includes(query) ||
-      entry.title.label.includes(query)
-    );
-  });
-
-  const formattedData = formatGetAppsApiRes(searchedResult);
+  const formattedData = formatGetRecommandAppsApiRes({ res, query });
 
   return formattedData;
 }

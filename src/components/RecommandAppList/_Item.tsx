@@ -9,6 +9,7 @@ export default function Item({ recommandApp }: Props) {
     <div className="w-[65px] md:w-[75px] lg:w-[100px] flex flex-col shrink-0">
       <a href={recommandApp.link}>
         <img
+          loading="lazy"
           src={recommandApp.iconUrl.sm}
           srcSet={`${recommandApp.iconUrl.sm} 640w, ${recommandApp.iconUrl.md} 768w, ${recommandApp.iconUrl.lg} 1024w`}
           sizes="(max-width: 640px) 640px, (max-width: 768px) 768px, 1024px"

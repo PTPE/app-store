@@ -7,7 +7,7 @@
 ## 使用指南
 
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
+git clone https://github.com/PTPE/app-store.git
 cd app-store
 ```
 

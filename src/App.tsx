@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="flex flex-col">
       {(isLoading || isFetching) && <Loading />}
-      <div className="py-3 bg-gray-100 w-full text-center border-b-[1px] border-gray-300">
+      <div className="sticky top-0 z-10 py-3 bg-gray-100 w-full text-center border-b-[1px] border-gray-300">
         <input
           type="text"
           placeholder="搜尋"

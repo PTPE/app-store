@@ -29,7 +29,7 @@ function App() {
         <input
           type="text"
           placeholder="搜尋"
-          className="placeholder:text-center bg-gray-300 rounded-[5px] py-1 px-2"
+          className="placeholder:text-center bg-gray-300 rounded-[5px] py-1 px-2 w-2/3 md:w-1/2 lg:w-1/3"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />

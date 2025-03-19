@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Application } from "../../types";
+import { useInfiniteScroll } from "../../hooks/useInfiniteScroll";
 
 type Props = {
   app: Application;
@@ -7,34 +8,17 @@ type Props = {
 export default function Item({ app }: Props) {
   const [isVisible, setIsVisible] = useState(false);
 
-  const itemRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (itemRef.current) {
-      observer.observe(itemRef.current);
-    }
-
-    return () => {
-      if (itemRef.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        observer.unobserve(itemRef.current);
-      }
-    };
-  }, []);
+  const { observeNode } = useInfiniteScroll({
+    onIntersect: () => {
+      setIsVisible(true);
+    },
+    threshold: 0.1,
+  });
 
   return (
     <a href={app.link}>
       <div
-        ref={itemRef}
+        ref={observeNode}
         className={`shrink-0 flex items-center gap-2 py-3 transition-all duration-500 ease-in-out transform ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}

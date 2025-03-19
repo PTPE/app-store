@@ -6,7 +6,7 @@ type Props = {
 
 export default function Item({ recommandApp }: Props) {
   return (
-    <div className="w-[65px] md:w-[75px] lg:w-[100px] flex flex-col shrink-0">
+    <div className="w-[65px] md:w-[75px] lg:w-[100px] flex flex-col shrink-0 cursor-pointer">
       <a href={recommandApp.link}>
         <div className="w-[65px] md:w-[75px] lg:w-[100px] aspect-square rounded-2xl border-[1px] border-gray-300">
           <img

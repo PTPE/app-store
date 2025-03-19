@@ -19,7 +19,7 @@ export default function Item({ app }: Props) {
     <a href={app.link}>
       <div
         ref={observeNode}
-        className={`shrink-0 flex items-center gap-2 py-3 md:py-6 lg:py-9 transition-all duration-500 ease-in-out transform ${
+        className={`shrink-0 flex items-center gap-2 py-3 md:py-6 lg:py-9 transition-all duration-500 ease-in-out transform cursor-pointer ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
